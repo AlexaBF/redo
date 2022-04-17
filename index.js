@@ -3,12 +3,15 @@ const cors = require('cors');
 const app = express();
 const user = require('./routes/user')
 const status = require('./routes/status')
+const branch = require('./routes/branch')
+const userRole = require('./routes/userRole')
 
 //Routes
 const path = '/api'
 app.use(path,user);
 app.use(path,status);
-
+app.use(path,branch);
+app.use(path,userRole);
 
 //Configuration
 app.use(cors())
