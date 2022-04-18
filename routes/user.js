@@ -8,19 +8,17 @@ router.get(path, (req, res)=>{
     connection.query("CALL `REDO_MAKMA`.`visualizarUsuario`();"
     ,[], (err, result, fields) =>{
         if(err){
-            res.json({
-                message:"Hay un error"
+            res.status(500).send({
+                done:false,
             })
         }
-        else{
-            res.json( result[0] );
-        }
+        res.send( {done: true, payload: result[0]} );
     })
 })
 
 //Creates a new user
 router.post(path,(req,res) =>{
-    const {name,mail,password, phone, rol, branch } = req.body
+    const {name, mail, password, phone, rol, branch } = req.body
     console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`crearUsuario`(?,?,?,?,?,?,?)",
     [name, '', mail, password, phone, rol, branch],
@@ -29,14 +27,12 @@ router.post(path,(req,res) =>{
             console.log(err)
             res.status(500).send({
                 done:false,
-                message:"Hay un error"
             })
         }
         else{
             res.json({ done: true });
         }
     })
-    res.status(400).send({done: false, message:"Error with the arguments"})
 })
 
 //Deletes an user
