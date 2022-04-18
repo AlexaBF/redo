@@ -20,19 +20,23 @@ router.get(path, (req, res)=>{
 
 //Creates a new user
 router.post(path,(req,res) =>{
-    res.send({working: true})
-    connection.query("CALL `REDO_MAKMA`.`crearUsuario`(?,?,?,?,?,?,?)", 
-    [req.body.Nombre, req.body.Apellido, req.body.Correo, req.body.Password, req.body.Telefono, req.body.Rol_id, req.body.Sucursal_id], 
+    const {name,mail,password, phone, rol, branch } = req.body
+    console.log(req.body)
+    connection.query("CALL `REDO_MAKMA`.`crearUsuario`(?,?,?,?,?,?,?)",
+    [name, '', mail, password, phone, rol, branch],
     (err, result, fields) =>{
         if(err){
-            res.json({
+            console.log(err)
+            res.status(500).send({
+                done:false,
                 message:"Hay un error"
             })
         }
         else{
-            res.json({ message: true });
+            res.json({ done: true });
         }
     })
+    res.status(400).send({done: false, message:"Error with the arguments"})
 })
 
 //Deletes an user
