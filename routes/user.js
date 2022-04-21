@@ -5,7 +5,7 @@ const path = '/user'
 
 //returns a list of the users
 router.get(path, (req, res)=>{
-    connection.query("CALL `REDO_MAKMA`.`visualizarUsuario`();"
+    connection.query("CALL `REDO_MAKMA`.`visualizarUsuarios`();"
     ,[], (err, result, fields) =>{
         if(err){
             res.status(500).send({
@@ -20,8 +20,8 @@ router.get(path, (req, res)=>{
 router.post(path,(req,res) =>{
     const {name, mail, password, phone, rol, branch } = req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`crearUsuario`(?,?,?,?,?,?,?)",
-    [name, '', mail, password, phone, rol, branch],
+    connection.query("CALL `REDO_MAKMA`.`crearUsuario`(?,?,?,?,?)",
+    [name, mail, password, phone, rol, branch],
     (err, result, fields) =>{
         if(err){
             console.log(err)
