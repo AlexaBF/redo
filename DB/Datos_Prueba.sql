@@ -11,9 +11,9 @@ INSERT INTO `REDO_MAKMA`.`Rol` (`tipo`) VALUES ('Trabajador social'); -- id: 2
 INSERT INTO `REDO_MAKMA`.`Rol` (`tipo`) VALUES ('Cajero'); -- id: 3
 
 -- Datos de prueba para usuario
-INSERT INTO `REDO_MAKMA`.`Usuario` (`nombre`, `apellidos`, `correo`, `password`, `telefono`, `rol_idRol`, `sucursal_idSucursal`) 
-VALUES ('Juan', 'Perez', 'Juan@juan.com', sha('1234'), '12345', '1', '1');
-INSERT INTO `REDO_MAKMA`.`Usuario` (`nombre`, `apellidos`, `correo`, `password`, `telefono`, `rol_idRol`, `sucursal_idSucursal`) 
-VALUES ('Mauricio', 'Merida', 'Mauricio@mauricio.com', sha('1234'), '123456', '2', '2');
-INSERT INTO `REDO_MAKMA`.`Usuario` (`nombre`, `apellidos`, `correo`, `password`, `telefono`, `rol_idRol`, `sucursal_idSucursal`) 
-VALUES ('Alexa', 'Basurto', 'Alexa@alexa.com', sha('1234'), '1234567', '3', '3');
+INSERT INTO `REDO_MAKMA`.`Usuario` (`nombre`, `correo`, `password`, `telefono`, `rol_idRol`, `sucursal_idSucursal`) 
+VALUES ('Juan Perez', 'Juan@juan.com', sha2('1234', 224), '12345', '1', '1');
+INSERT INTO `REDO_MAKMA`.`Usuario` (`nombre`, `correo`, `password`, `telefono`, `rol_idRol`, `sucursal_idSucursal`) 
+VALUES ('Mauricio Merida', 'Mauricio@mauricio.com', sha2('1234', 224), '123456', '2', '2');
+INSERT INTO `REDO_MAKMA`.`Usuario` (`nombre`, `correo`, `password`, `telefono`, `rol_idRol`, `sucursal_idSucursal`) 
+VALUES ('Alexa Basurto', 'Alexa@alexa.com', sha2('1234', 224), '1234567', '3', '3');
