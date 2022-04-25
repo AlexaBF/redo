@@ -8,6 +8,7 @@ router.get(path, (req, res)=>{
     connection.query("CALL `REDO_MAKMA`.`visualizarUsuarios`();"
     ,[], (err, result, fields) =>{
         if(err){
+            console.log(err)
             res.status(500).send({
                 done:false,
             })
@@ -35,12 +36,43 @@ router.post(path,(req,res) =>{
     })
 })
 
-//Deletes an user
+//Delete user
 router.delete(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
-
+    const { id } = req.body
+    console.log(req.body)
+    connection.query("CALL `REDO_MAKMA`.`eliminarUsuario`(?)",
+    [id],
+    (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false,
+            })
+        }
+        else{
+            res.json({ done: true });
+        }
     })
 })
+
+//Modify user
+router.put(path, (req,res) =>{
+    const { name,mail,password,phone,rol,branch,id } = req.body
+    console.log(req.body)
+    connection.query("CALL `REDO_MAKMA`.`modificarUsuario`(?,?,?,?,?,?,?)",
+    [name,mail,password,phone,rol,branch,id],
+    (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false,
+            })
+        }
+        else{
+            res.json({ done: true });
+        }
+    })
+})
+
 
 module.exports = router;
