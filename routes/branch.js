@@ -5,7 +5,7 @@ const path = '/branch'
 
 //returns a list of the branches
 router.get(path, (req, res)=>{
-    connection.query("CALL `REDO_MAKMA`.`visualizarSucursales`();"
+    connection.query("CALL `REDO_MAKMA`.`readBranches`();"
     ,[], (err, result, fields) =>{
         if(err){
             res.json({
@@ -28,8 +28,16 @@ router.post(path, (req,res) =>{
     })
 })
 
-//Deletes an branch
+//Deletes a branch
 router.delete(path, (req,res) =>{
+    res.send({working:true})
+    connection.query("storedProcedure()", [], (err, result, fields) =>{
+
+    })
+})
+
+//Update a branch
+router.put(path, (req,res) =>{
     res.send({working:true})
     connection.query("storedProcedure()", [], (err, result, fields) =>{
 
