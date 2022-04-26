@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
-const path = '/userRole'
+const path = '/aUser'
 
-//returns a list of the user roles
-router.get(path, (req, res)=>{
+//returns a single user
+router.post(path,(req,res) =>{
     const { id } = req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`visualizarUsuario`();"
+    connection.query("CALL `REDO_MAKMA`.`readUser`(?);",
     [id],
     (err, result, fields) =>{
         if(err){
@@ -24,15 +24,15 @@ router.get(path, (req, res)=>{
 
 
 
-//Creates a new user role
-router.post(path, (req,res) =>{
+//Creates a new something
+router.get(path, (req,res) =>{
     res.send({working:true})
     connection.query("storedProcedure()", [], (err, result, fields) =>{
 
     })
 })
 
-//Deletes an user role
+//Deletes a something
 router.delete(path, (req,res) =>{
     res.send({working:true})
     connection.query("storedProcedure()", [], (err, result, fields) =>{
@@ -40,7 +40,7 @@ router.delete(path, (req,res) =>{
     })
 })
 
-//Modify an user role
+//Update a something
 router.put(path, (req,res) =>{
     res.send({working:true})
     connection.query("storedProcedure()", [], (err, result, fields) =>{

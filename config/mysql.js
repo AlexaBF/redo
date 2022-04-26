@@ -1,10 +1,10 @@
 var mysql= require ('mysql');
 
 const config = {
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASS,
-    database: process.env.DB,
+    host: 'redo.c4c6b7damgb3.us-east-1.rds.amazonaws.com', //process.env.HOST,
+    user: 'sa', //process.env.USER,
+    password: 'redo_makma', //process.env.PASS,
+    database: 'REDO_MAKMA', //process.env.DB,
     port: 3306,
     multipleStatements: true //Allow run transactions as queries
 };
