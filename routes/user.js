@@ -11,10 +11,10 @@ router.get(path, (req, res)=>{
         if(err){
             console.log(err)
             res.status(500).send({
-                done:false,
+                messaage:"Hay un error"
             })
         }
-        res.send( {done: true, payload: result[0]} );
+        res.send( result[0]);
     })
 })
 
@@ -28,7 +28,7 @@ router.post(path, validateUser(), (req, res) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                done:false,
+                done:false
             })
         }
         else{
@@ -47,7 +47,7 @@ router.delete(path, (req,res) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                done:false,
+                done:false
             })
         }
         else{
@@ -66,7 +66,7 @@ router.put(path, (req,res) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                done:false,
+                done:false
             })
         }
         else{

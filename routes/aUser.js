@@ -13,11 +13,11 @@ router.post(path,(req,res) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                done:false,
+                message:"Hay un error"
             })
         }
         else{
-            res.send( {done: true, payload: result[0]} );
+            res.send( result[0] );
         }
     })
 })
