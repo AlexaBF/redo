@@ -6,6 +6,7 @@ const status = require('./routes/status')
 const branch = require('./routes/branch')
 const userRole = require('./routes/userRole')
 const aUser = require('./routes/aUser')
+const login = require('./routes/login')
 app.use(cors())
 //Configuration
 //Que se envíe en formato json
@@ -19,6 +20,7 @@ app.use(path,status);
 app.use(path,branch);
 app.use(path,userRole);
 app.use(path,aUser);
+app.use(path,login)
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
