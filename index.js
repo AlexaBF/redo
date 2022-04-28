@@ -15,6 +15,8 @@ app.use(express.json());  //Para pasarlo a formato json
 const path = '/api'
 app.post(path+"/login", login)
 app.use(authMiddleware)
+//IMPORTANT: ALL THE ROUTES THAT ARE ADDED UP FROM THE AUTHMIDDLEWARE WILL BE UNPROTECTED
+// ADD ALL THE PROTECTED ROUTES BELOW THIS COMMENT
 app.use(path,user);
 app.use(path,status);
 app.use(path,branch);

@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const {key} =require('../config/jwt.js')
+const {connection} = require("../config/mysql.js")
 
+//Middleware that checks the and validates de token
 module.exports.authMiddleware = ((req,res,next)=>{
     const token= req.headers["authorization"];
     if(token){
@@ -15,25 +17,38 @@ module.exports.authMiddleware = ((req,res,next)=>{
             next()
         });
     }
-    res.status(401).send({done: false, message: "Token no proporcionado"})
+    return res.status(401).send({done: false, message: "Token no proporcionado"})
 })
+//The endpoint that validates the credentials and  returns the token
 module.exports.login = (req,res)=>{
    const {mail, password} = req.body
     //TODO: CALL SOME PROCEDURE HERE
-    if(mail == 'mawi@tec.mx', password =='123'){
-        const payload = {
-            rol: '1', //The rol of the user
-            branch: '2', //The branch of the rol
-            id: '2', //The id of the user
-        }
-        const token = jwt.sign(payload, key, {expiresIn:7200 }); //TODO: CHECK FOR EXPIRATION TIME
-        res.status(200).send({
-            done: true,
-            token,
+    connection.query("CALL `REDO_MAKMA`.`loginUser`(?,?);"
+        ,[mail,password], (err, result, fields) =>{
+            if(err){
+                res.status(500).json({
+                    done:false,
+                    message:"Error with the db"
+                })
+                return;
+            }
+            const {cant, id, role, branch} = result[0][0];
+            if(cant>0){
+                const payload = {
+                    id,
+                    rol : role,
+                    branch
+                }
+                const token = jwt.sign(payload, key, {expiresIn:7200 }); //TODO: CHECK FOR EXPIRATION TIME
+                res.status(200).send({
+                    done: true,
+                    token,
+                })
+            }else{
+                res.status(400).send({
+                    done: false,
+                    message: "User or password not found"
+                })
+            }
         })
-    }
-    res.status(400).send({
-        done: false,
-        message: "User or password not found"
-    })
 }
