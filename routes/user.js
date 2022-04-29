@@ -6,6 +6,8 @@ const path = '/user'
 
 //returns a list of the users
 router.get(path, (req, res)=>{
+    console.log(req.token)
+    const {id, rol, branch} = req.token;
     connection.query("CALL `REDO_MAKMA`.`readUsers`();"
     ,[], (err, result, fields) =>{
         if(err){
