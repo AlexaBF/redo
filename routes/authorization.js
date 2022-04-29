@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const {key} =require('../config/jwt.js')
 const {connection} = require("../config/mysql.js")
+const express = require("express")
+const  middleware = express.Router();
 
 //Middleware that checks the and validates de token
 module.exports.authMiddleware = ((req,res,next)=>{
@@ -8,16 +10,17 @@ module.exports.authMiddleware = ((req,res,next)=>{
     if(token){
         jwt.verify(token, key, (err,decoded)=>{
             if (err){
-                return res.status(401).send({
+                res.status(401).send({
                     done: false,
                     message: 'Invalid token'
                 })
+            }else{
+                next()
             }
-            req.decoded= decoded
-            next()
         });
+    }else{
+        res.status(401).send({done: false, message: "Token no proporcionado"})
     }
-    return res.status(401).send({done: false, message: "Token no proporcionado"})
 })
 //The endpoint that validates the credentials and  returns the token
 module.exports.login = (req,res)=>{
