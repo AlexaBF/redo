@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
-const {validateUser} = require("../lib/validations.js")
 const path = '/beneficiaries'
 
 //returns a list of beneficiaries by branch
