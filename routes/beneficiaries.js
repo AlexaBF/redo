@@ -5,7 +5,7 @@ const {validateUser} = require("../lib/validations.js")
 const path = '/beneficiaries'
 
 //returns a list of beneficiaries by branch
-router.get(path, (req, res)=>{
+router.post(path, (req, res)=>{
     const { id } = req.body
     console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`readBeneficiaries` (?);"
@@ -21,18 +21,27 @@ router.get(path, (req, res)=>{
     })
 })
 
-//Creates a new something
-router.post(path, (req,res) =>{
+//Gets a new something
+router.get(path, (req,res) =>{
     res.send({working:true})
     connection.query("storedProcedure()", [], (err, result, fields) =>{
 
     })
 })
 
-//Deletes a something
+//Deletes a beneficiary by their id
 router.delete(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
+    const {id} = req.body
+    console.log(req.body)
+    connection.query("CALL `REDO_MAKMA`.`deleteBeneficiary`(?);", [id], (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false
+            })
+        }else{
+            res.json( {done:true});
+        }
 
     })
 })
