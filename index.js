@@ -7,6 +7,7 @@ const branch = require('./routes/branch')
 const userRole = require('./routes/userRole')
 const user = require('./routes/user')
 const beneficiaries = require('./routes/beneficiaries')
+const beneficiary = require('./routes/beneficiary')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -25,6 +26,7 @@ app.use(path,branch);
 app.use(path,userRole);
 app.use(path,user);
 app.use(path,beneficiaries);
+app.use(path,beneficiary);
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
