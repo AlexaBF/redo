@@ -9,6 +9,7 @@ const user = require('./routes/user')
 const beneficiaries = require('./routes/beneficiaries')
 const beneficiary = require('./routes/beneficiary')
 const beneficiaryGD = require('./routes/beneficiaryGD')
+const beneficiaryDocs = require('./routes/beneficiaryDocs')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -29,6 +30,7 @@ app.use(path,user);
 app.use(path,beneficiaries);
 app.use(path,beneficiary);
 app.use(path,beneficiaryGD);
+app.use(path.beneficiaryDocs);
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
