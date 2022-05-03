@@ -13,7 +13,7 @@ router.get(path, (req, res)=>{
         if(err){
             console.log(err)
             res.status(500).send({
-                messaage:"Hay un error"
+                messaage:"There is an error"
             })
         }
         res.send( result[0]);

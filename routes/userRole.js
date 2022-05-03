@@ -9,7 +9,7 @@ router.get(path, (req, res)=>{
     ,[], (err, result, fields) =>{
         if(err){
             res.json({
-                message:"Hay un error"
+                message:"There is an error"
             })
         }
         else{
