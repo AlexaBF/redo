@@ -1,31 +1,28 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
-const path = '/aUser'
+const {validateUser} = require("../lib/validations.js")
+const path = '/beneficiaries'
 
-//returns a single user
-router.post(path,(req,res) =>{
+//returns a list of beneficiaries by branch
+router.get(path, (req, res)=>{
     const { id } = req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`readUser`(?);",
-    [id],
-    (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`readBeneficiaries` (?);"
+    ,[id], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                message:"Hay un error"
+                messaage:"Hay un error"
             })
-        }
-        else{
-            res.send( result[0] );
+        }else{
+            res.send( result[0]);
         }
     })
 })
 
-
-
 //Creates a new something
-router.get(path, (req,res) =>{
+router.post(path, (req,res) =>{
     res.send({working:true})
     connection.query("storedProcedure()", [], (err, result, fields) =>{
 
@@ -47,5 +44,6 @@ router.put(path, (req,res) =>{
 
     })
 })
+
 
 module.exports = router;

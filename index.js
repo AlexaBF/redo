@@ -1,12 +1,12 @@
 const express = require('express')
 const cors = require('cors');
 const app = express();
-const user = require('./routes/user')
+const users = require('./routes/users')
 const status = require('./routes/status')
 const branch = require('./routes/branch')
 const userRole = require('./routes/userRole')
-const aUser = require('./routes/aUser')
-const beneficiary = require('./routes/beneficiary')
+const user = require('./routes/user')
+const beneficiaries = require('./routes/beneficiaries')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -19,12 +19,12 @@ app.post(path+"/login", login)
 app.use(authMiddleware)
 //IMPORTANT: ALL THE ROUTES THAT ARE ADDED UP FROM THE AUTHMIDDLEWARE WILL BE UNPROTECTED
 // ADD ALL THE PROTECTED ROUTES BELOW THIS COMMENT
-app.use(path, user);
+app.use(path, users);
 app.use(path,status);
 app.use(path,branch);
 app.use(path,userRole);
-app.use(path,aUser);
-app.use(path,beneficiary);
+app.use(path,user);
+app.use(path,beneficiaries);
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
