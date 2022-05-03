@@ -47,6 +47,7 @@ module.exports.login = (req,res)=>{
                 res.status(200).send({
                     done: true,
                     token,
+                    role
                 })
             }else{
                 res.status(400).send({
