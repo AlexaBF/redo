@@ -46,11 +46,20 @@ router.delete(path, (req,res) =>{
     })
 })
 
-//Update a something
+//change beneficiary status to active==1 or inactive==0
 router.put(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
-
+    const {id,status}=req.body
+    console.log(req.body)
+    connection.query("CALL `REDO_MAKMA`.`updateBeneficiaryStatus` (?,?);", [id,status], (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false
+            })
+        }else{
+            
+            res.json({done:true});
+        }
     })
 })
 
