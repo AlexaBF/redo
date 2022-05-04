@@ -10,7 +10,7 @@ const beneficiaries = require('./routes/beneficiaries')
 const beneficiary = require('./routes/beneficiary')
 const beneficiaryGD = require('./routes/beneficiaryGD')
 const beneficiaryDocs = require('./routes/beneficiaryDocs')
-const frecuency = require('./routes/frecuency')
+const frequency = require('./routes/frequency')
 const day = require('./routes/day')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
@@ -33,7 +33,7 @@ app.use(path,beneficiaries);
 app.use(path,beneficiary);
 app.use(path,beneficiaryGD);
 app.use(path,beneficiaryDocs);
-app.use(path,frecuency);
+app.use(path,frequency);
 app.use(path,day);
 
 //Servidor
