@@ -32,5 +32,40 @@ router.post(path, (req,res) =>{
     })
 })
 
+//delete an attendance frequency by their ID
+router.delete(path, (req,res) =>{
+    const{id}=req.body
+    console.log(req.body);
+    
+    connection.query("CALL `REDO_MAKMA`.`deleteFrecuency`(?);", [id], (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false
+            })
+        }else{
+            res.json({done:true});
+        }
+    })
+})
+
+//update an attendance frequency by their updated name and ID
+router.put(path, (req,res)=>{
+    const{frequency,id}=req.body
+    console.log(req.body)
+    connection.query("CALL `REDO_MAKMA`.`updateFrecuency`(?,?);", [frequency,id], (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false
+            })
+        }else{
+            res.json({done:true});
+        }
+    })
+
+})
+
+
 module.exports = router;
 
