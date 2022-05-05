@@ -51,9 +51,9 @@ router.delete(path, (req,res) =>{
 
 //update an attendance frequency by their updated name and ID
 router.put(path, (req,res)=>{
-    const{frequency,id}=req.body
+    const{id,frequency}=req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`updateFrecuency`(?,?);", [frequency,id], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`updateFrecuency`(?,?);", [id,frequency], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
