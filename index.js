@@ -12,6 +12,9 @@ const beneficiaryGD = require('./routes/beneficiaryGD')
 const beneficiaryDocs = require('./routes/beneficiaryDocs')
 const frequency = require('./routes/frequency')
 const day = require('./routes/day')
+const actBeneficiaries = require('./routes/actBeneficiaries')
+const inactBeneficiaries = require('./routes/inactBeneficiaries')
+const community = require('./routes/community')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -35,6 +38,9 @@ app.use(path,beneficiaryGD);
 app.use(path,beneficiaryDocs);
 app.use(path,frequency);
 app.use(path,day);
+app.use(path,actBeneficiaries);
+app.use(path,inactBeneficiaries);
+app.use(path,community);
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
