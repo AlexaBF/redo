@@ -7,7 +7,7 @@ const path = '/inactBeneficiaries'
 //id == branch id
 router.post(path, (req, res)=>{
     const { id } = req.body
-    connection.query("CALL `REDO_MAKMA`.`readInctiveBeneficiaries`(?);"
+    connection.query("CALL `REDO_MAKMA`.`readInactiveBeneficiaries`(?);"
     ,[id], (err, result, fields) =>{
         if(err){
             console.log(err)
