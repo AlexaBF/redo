@@ -20,6 +20,7 @@ const recorAbsences = require('./routes/recordAbsences')
 const requests = require('./routes/requests')
 const reasons = require('./routes/reasons')
 const towns = require('./routes/towns')
+const communities = require('./routes/communities')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -51,6 +52,7 @@ app.use(path,recorAbsences);
 app.use(path,requests);
 app.use(path,reasons);
 app.use(path,towns);
+app.use(path,communities)
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
