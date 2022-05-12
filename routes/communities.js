@@ -3,18 +3,19 @@ const router = express.Router()
 const {connection} = require("../config/mysql.js")
 const path = '/communities'
 
-//create a new community that will be attended by BAMX
+//view the list of active communities by branch
+//id == branch id
 router.post(path, (req, res)=>{
-    const { name,status,branch,town,frequency  } = req.body
-    connection.query("CALL `REDO_MAKMA`.`createCommunity`(?,?,?,?,?);"
-    ,[name,status,branch,town,frequency], (err, result, fields) =>{
+    const { id } = req.body
+    connection.query("CALL `REDO_MAKMA`.`readActiveCommunities`(?);"
+    ,[id], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                done:false
+                messaage:"There is an error"
             })
         }else{
-            res.json({done:true});
+            res.send( result[0]);
         }
     })
 })
