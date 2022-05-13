@@ -15,7 +15,7 @@ const day = require('./routes/day')
 const actBeneficiaries = require('./routes/actBeneficiaries')
 const inactBeneficiaries = require('./routes/inactBeneficiaries')
 const communities = require('./routes/communities')
-const generalAbsences = require('./routes/generalAbsences')
+const absences = require('./routes/absences')
 const recorAbsences = require('./routes/recordAbsences')
 const requests = require('./routes/requests')
 const reasons = require('./routes/reasons')
@@ -48,7 +48,7 @@ app.use(path,day);
 app.use(path,actBeneficiaries);
 app.use(path,inactBeneficiaries);
 app.use(path,community);
-app.use(path,generalAbsences);
+app.use(path,absences);
 app.use(path,recorAbsences);
 app.use(path,requests);
 app.use(path,reasons);

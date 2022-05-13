@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
-const path = '/generalAbsences'
+const path = '/absences'
 
 //view a summarized list of absences of recent beneficiaries by branch id
 router.post(path, (req, res)=>{
