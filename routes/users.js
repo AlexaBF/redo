@@ -60,10 +60,10 @@ router.delete(path, (req,res) =>{
 
 //Update user
 router.put(path, (req,res) =>{
-    const { name,mail,password,phone,rol,branch,id } = req.body
+    const { name,mail,phone,rol,branch,id } = req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`updateUser`(?,?,?,?,?,?,?)",
-    [name,mail,password,phone,rol,branch,id],
+    connection.query("CALL `REDO_MAKMA`.`updateUser`(?,?,?,?,?,?)",
+    [name,mail,phone,rol,branch,id],
     (err, result, fields) =>{
         if(err){
             console.log(err)
