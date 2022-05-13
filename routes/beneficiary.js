@@ -4,12 +4,12 @@ const {connection} = require("../config/mysql.js")
 const path = '/beneficiary'
 
 //returns relevant information from a specific beneficiary
-//this by indicating their branch id and the beneficiary id
+//this by indicating the beneficiary id
 router.post(path, (req, res)=>{
-    const { idBranch,idBeneficiary } = req.body
+    const { idBeneficiary } = req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`readBeneficiary`(?,?);"
-    ,[idBranch,idBeneficiary], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`readBeneficiary`(?);"
+    ,[idBeneficiary], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
