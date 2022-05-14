@@ -23,28 +23,19 @@ router.post(path,(req,res) =>{
 })
 
 
-
-//Creates a new something
-router.get(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
-
-    })
-})
-
-//Deletes a something
-router.delete(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
-
-    })
-})
-
-//Update a something
+//Update a user password
 router.put(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
-
+    const {password,id}=req.body
+    connection.query("CALL `REDO_MAKMA`.`updateUserPassword`(?,?);", [password,id], (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false
+            })
+        }
+        else{
+            res.json( {done: true} );
+        }
     })
 })
 

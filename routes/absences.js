@@ -19,4 +19,19 @@ router.post(path, (req, res)=>{
     })
 })
 
+//update absence
+router.put(path, (req, res)=>{
+    const { idReason,idAbsence } = req.body
+    connection.query("CALL `REDO_MAKMA`.`updateAbsence`(?,?);"
+    ,[idReason,idAbsence], (err, result, fields) =>{
+        if(err){
+            console.log(err)
+            res.status(500).send({
+                done:false
+            })
+        }else{
+            res.json({done:true});
+        }
+    })
+})
 module.exports = router;

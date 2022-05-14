@@ -22,6 +22,13 @@ const reasons = require('./routes/reasons')
 const towns = require('./routes/towns')
 const community = require('./routes/community')
 const state = require('./routes/state')
+const userBranch = require('./routes/userBranch')
+const committeeMembers = require('./routes/committeeMembers')
+const request = require('./routes/request')
+const committeeMember = require('./routes/committeeMember')
+const attendanceJustify = require('./routes/attendanceJustify')
+const attendance = require('./routes/attendance')
+const justification = require('./routes/justification')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -55,6 +62,13 @@ app.use(path,reasons);
 app.use(path,towns);
 app.use(path,communities);
 app.use(path,state);
+app.use(path,userBranch);
+app.use(path,committeeMembers);
+app.use(path,request);
+app.use(path,committeeMember);
+app.use(path,attendanceJustify);
+app.use(path,attendance);
+app.use(path,justification);
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
