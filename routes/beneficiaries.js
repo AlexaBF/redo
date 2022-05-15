@@ -4,15 +4,14 @@ const {connection} = require("../config/mysql.js")
 const path = '/beneficiaries'
 
 //returns a list of beneficiaries by branch
-router.post(path, (req, res)=>{
-    const { id } = req.body
-    console.log(req.body)
+router.get(path, (req, res)=>{
+    const { branch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readBeneficiaries` (?);"
-    ,[id], (err, result, fields) =>{
+    ,[branch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                messaage:"There is an error"
+                message:"There is an error"
             })
         }else{
             res.send( result[0]);
@@ -20,13 +19,6 @@ router.post(path, (req, res)=>{
     })
 })
 
-//Gets a new something
-router.get(path, (req,res) =>{
-    res.send({working:true})
-    connection.query("storedProcedure()", [], (err, result, fields) =>{
-
-    })
-})
 
 //Deletes a beneficiary by their id
 router.delete(path, (req,res) =>{
