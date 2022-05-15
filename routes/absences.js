@@ -11,10 +11,17 @@ router.get(path, (req, res)=>{
         if(err){
             console.log(err)
             res.status(500).send({
-                messaage:"There is an error"
+                message:"There is an error"
             })
         }else{
-            res.send( result[0]);
+            //temporaly modifying the json since the procedures doesnt return the correct values
+            let modifiedJsonArray = [];
+            result[0].map((json)=>{
+                const {Folio, Nombre, Telefono, CantFaltas} = json;
+                const correctJSON = {Folio, Nombre, Telefono, CantFaltas}
+                modifiedJsonArray.push(correctJSON)
+            })
+            res.send( modifiedJsonArray);
         }
     })
 })
