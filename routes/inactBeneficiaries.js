@@ -5,17 +5,23 @@ const path = '/inactBeneficiaries'
 
 //view the list of inactive beneficiaries by branch
 //id == branch id
-router.post(path, (req, res)=>{
-    const { id } = req.body
+router.get(path, (req, res)=>{
+    const { branch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readInactiveBeneficiaries`(?);"
-    ,[id], (err, result, fields) =>{
+    ,[branch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                messaage:"There is an error"
+                message:"There is an error"
             })
         }else{
-            res.send( result[0]);
+            const modifiedJsonArray = []
+            result[0].map((json)=>{
+                const {Folio, Nombre, Colonia, Fecha, Falta} = json
+                const correctJson = {Folio, Nombre,  Fecha, Falta}
+                modifiedJsonArray.push(correctJson)
+            })
+            res.send(modifiedJsonArray);
         }
     })
 })
