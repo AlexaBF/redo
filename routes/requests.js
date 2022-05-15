@@ -4,10 +4,10 @@ const {connection} = require("../config/mysql.js")
 const path = '/requests'
 
 //view the list of requests made by communities in the current month by branch id
-router.post(path, (req, res)=>{
-    const { id } = req.body
+router.get(path, (req, res)=>{
+    const { branch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readRequests`(?);"
-    ,[id], (err, result, fields) =>{
+    ,[branch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
