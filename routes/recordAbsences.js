@@ -14,7 +14,13 @@ router.get(path, (req, res)=>{
                 message:"There is an error"
             })
         }else{
-            res.send( result[0]);
+            const modifiedJsonArray = []
+            result[0].map((json)=>{
+                const {Folio, Nombre, Colonia, Telefono, Fecha, CanFaltas, Razon, Motivo = "pendiente motivo"} = json
+                const correctJson = {Folio, Nombre, Colonia, Telefono, Fecha, CanFaltas, Razon, Motivo}
+                modifiedJsonArray.push(correctJson)
+            })
+            res.send(modifiedJsonArray);
         }
     })
 })
