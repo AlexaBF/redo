@@ -28,10 +28,11 @@ module.exports.valUserModification = ()=>{
 }
 
 module.exports.valPassModification = () =>{
-    const {validatePassword, validatePasswordMatch} = Validations
+    const {validateNumeric,validatePassword, validatePasswordMatch} = Validations
     return [
         validatePassword('password', 'clave'),
         validatePassword('confirmationPassword', 'clave de confirmacion'),
+        validateNumeric('id'),
         validatePasswordMatch(),
         ValMiddleware
     ]
