@@ -6,8 +6,8 @@ const path = '/attendance'
 
 //create attendance for a beneficiary by their id
 router.post(path,(req,res) =>{
-    const { id } = req.body
-    connection.query("CALL `REDO_MAKMA`.`createAttendance`(?);",[id],(err, result, fields) =>{
+    const { folio,attendance } = req.body
+    connection.query("CALL `REDO_MAKMA`.`attendance`(?, ?);",[folio,attendance],(err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
@@ -15,7 +15,7 @@ router.post(path,(req,res) =>{
             })
         }
         else{
-            res.json({done:true});
+            res.send(result[0]);
         }
     })
 })
