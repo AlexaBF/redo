@@ -43,8 +43,12 @@ module.exports.Validations = {
     validatePasswordMatch: () =>(
         check("password", "Las claves son diferentes")
             .custom((value,{req}) => {
-                    if (value !== req.body.confirmationPassword)
-                        throw new Error("Claves diferentes");
+                const {confirmationPassword} = req.body;
+                if (value !== confirmationPassword){
+                    console.log(confirmationPassword,value)
+                    return false;
+                }
+                return true
             })
     )
 }
