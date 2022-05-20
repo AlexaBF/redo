@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
-const {validateUser} = require("../lib/validations.js")
+const {valUserInsertion, valUserModification} = require("../validations/Users.js")
 const path = '/users'
 
 //returns a list of the users
@@ -21,7 +21,7 @@ router.get(path, (req, res)=>{
 })
 
 //Creates a new user
-router.post(path, validateUser(), (req, res) =>{
+router.post(path, valUserInsertion(), (req, res) =>{
     const {name, mail, password, phone, rol, branch } = req.body
     console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`createUser`(?,?,?,?,?,?)",
@@ -59,7 +59,7 @@ router.delete(path, (req,res) =>{
 })
 
 //Update user
-router.put(path, (req,res) =>{
+router.put(path, valUserModification(),(req,res) =>{
     const { name,mail,phone,rol,branch,id } = req.body
     console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`updateUser`(?,?,?,?,?,?)",

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
+const {valPassModification} = require("../validations/Users");
 const path = '/user'
 
 //returns a single user
@@ -24,7 +25,7 @@ router.post(path,(req,res) =>{
 
 
 //Update a user password
-router.put(path, (req,res) =>{
+router.put(path, valPassModification(),(req, res) =>{
     const {password,id}=req.body
     connection.query("CALL `REDO_MAKMA`.`updateUserPassword`(?,?);", [password,id], (err, result, fields) =>{
         if(err){

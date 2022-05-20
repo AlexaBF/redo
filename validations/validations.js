@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator')
 
-const validations = {
+module.exports.Validations = {
     validateEmail: check('mail')
         .notEmpty()
         .withMessage('email es requerido')
@@ -33,27 +33,24 @@ const validations = {
             .isNumeric()
             .withMessage(`${alias} debe ser numerico`)
     ),
-}
-//Validates the necessary fields from the  json that is posted to /user
-module.exports.validateUser = ()=>{
-    const  {validateEmail, validatePhone, validateAlphaOfSize, validateNumeric} = validations
-    return [
-        validateEmail,
-        validatePhone,
-        validateAlphaOfSize('name','nombre'),
-        validateNumeric('branch','Sucursal'),
-        validateNumeric('rol'),
-        check('password')
+    validatePassword: (field, alias = field) =>(
+        check(field)
             .notEmpty()
-            .withMessage('Clave requerida')
+            .withMessage(`${alias} requerida`)
             .isLength({min:8})
-            .withMessage('La clave debe tener por lo menos 8 digitos'),
-        (req, res, next) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty())
-                return res.status(422).json({done: false, errors: errors.array()});
-            next();
-    },
-    ]
+            .withMessage(`${alias} debe contener por lo menos 8 caracteres`)
+    ),
+    validatePasswordMatch: () =>(
+        check("password", "Las claves son diferentes")
+            .custom((value,{req}) => {
+                    if (value !== req.body.confirmationPassword)
+                        throw new Error("Claves diferentes");
+            })
+    )
 }
-
+module.exports.ValMiddleware = (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            return res.status(422).json({done: false, errors: errors.array()});
+        next();
+}
