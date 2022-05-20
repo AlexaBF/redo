@@ -36,18 +36,23 @@ module.exports.login = (req,res)=>{
                 })
                 return;
             }
-            const {cant, id, role, branch} = result[0][0];
-            if(cant>0){
+            const {Cant, Id, IdRole, IdBranch, Name, Role} = result[0][0];
+            if(Cant>0){
                 const payload = {
-                    id,
-                    rol : role,
-                    branch
+                    Id,
+                    Rol : IdRole,
+                    IdBranch,
+                    Name,
+                    UserRole : Role
                 }
                 const token = jwt.sign(payload, key, {expiresIn:7200 }); //TODO: CHECK FOR EXPIRATION TIME
                 res.status(200).send({
                     done: true,
                     token,
-                    role
+                    IdRole,
+                    IdBranch,
+                    Name,
+                    UserRole : Role
                 })
             }else{
                 res.status(400).send({
