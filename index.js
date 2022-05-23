@@ -29,6 +29,9 @@ const committeeMember = require('./routes/committeeMember')
 const attendanceJustify = require('./routes/attendanceJustify')
 const attendance = require('./routes/attendance')
 const justification = require('./routes/justification')
+const justifications = require('./routes/justifications')
+const actCommunityAttendance = require('./routes/actCommunityAttendance')
+const rollCall = require('./routes/rollCall')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 app.use(cors())
@@ -69,6 +72,9 @@ app.use(path,committeeMember);
 app.use(path,attendanceJustify);
 app.use(path,attendance);
 app.use(path,justification);
+app.use(path,justifications);
+app.use(path,actCommunityAttendance);
+app.use(path,rollCall);
 
 //Servidor
 app.set('port', process.env.PORT || 8080)
