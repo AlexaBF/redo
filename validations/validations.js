@@ -10,11 +10,10 @@ module.exports.Validations = {
         .withMessage('Email invalido'),
     validatePhone: check('phone')
         .notEmpty()
-        .withMessage('Telefono es requerido')
+        .withMessage('Teléfono es requerido')
         .isLength(10)
-        .withMessage('Telefono invalido')
         .isNumeric()
-        .withMessage('Telefono invalido'),
+        .withMessage('Teléfono invalido'),
     validateAlphaOfSize: (field, alias = field, min = 0, max = 80) => (
         check(field)
             .notEmpty()
@@ -32,7 +31,7 @@ module.exports.Validations = {
             .notEmpty()
             .withMessage(`${alias} es requerido`)
             .isNumeric()
-            .withMessage(`${alias} debe ser numerico`)
+            .withMessage(`${alias} debe ser numérico`)
     ),
     validatePassword: (field, alias = field) =>(
         check(field)
@@ -42,7 +41,7 @@ module.exports.Validations = {
             .withMessage(`${alias} debe contener por lo menos 8 caracteres`)
     ),
     validatePasswordMatch: () =>(
-        check("password", "Las claves son diferentes")
+        check("password", "Las contraseñas son diferentes")
             .custom((value,{req}) => {
                 const {confirmationPassword} = req.body;
                 if (value !== confirmationPassword){
