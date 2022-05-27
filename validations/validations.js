@@ -11,7 +11,8 @@ module.exports.Validations = {
     validatePhone: check('phone')
         .notEmpty()
         .withMessage('Telefono es requerido')
-        .isLength(12)
+        .isLength(10)
+        .withMessage('Telefono invalido')
         .isNumeric()
         .withMessage('Telefono invalido'),
     validateAlphaOfSize: (field, alias = field, min = 0, max = 80) => (
