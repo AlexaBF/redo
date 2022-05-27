@@ -7,13 +7,14 @@ module.exports.Validations = {
         .trim()
         .normalizeEmail()
         .isEmail()
-        .withMessage('Email invalido'),
+        .withMessage('Email inválido'),
     validatePhone: check('phone')
         .notEmpty()
         .withMessage('Teléfono es requerido')
         .isLength(10)
+        .withMessage('Teléfono inválido')
         .isNumeric()
-        .withMessage('Teléfono invalido'),
+        .withMessage('Teléfono inválido'),
     validateAlphaOfSize: (field, alias = field, min = 0, max = 80) => (
         check(field)
             .notEmpty()
