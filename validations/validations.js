@@ -37,7 +37,7 @@ module.exports.Validations = {
     validatePassword: (field, alias = field) =>(
         check(field)
             .notEmpty()
-            .withMessage(`${alias} requerida`)
+            .withMessage(`la contraseña es requerida`)
             .isLength({min:8})
             .withMessage(`${alias} debe contener por lo menos 8 caracteres`)
     ),
