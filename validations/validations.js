@@ -34,10 +34,10 @@ module.exports.Validations = {
             .isNumeric()
             .withMessage(`${alias} debe ser numérico`)
     ),
-    validatePassword: (field, alias = field) =>(
+    validatePassword: (field, alias = "La contraseña") =>(
         check(field)
             .notEmpty()
-            .withMessage(`la contraseña es requerida`)
+            .withMessage(`${alias} es requerida`)
             .isLength({min:8})
             .withMessage(`${alias} debe contener por lo menos 8 caracteres`)
     ),
