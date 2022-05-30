@@ -5,7 +5,7 @@ const path = '/frequency'
 
 //visualize the attendance frequency catalog (monthly,biweekly,weekly)
 router.get(path, (req,res) =>{
-    connection.query("CALL `REDO_MAKMA`.`readFrecuencies`();", [], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`readFrequencies`();", [], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
@@ -20,7 +20,7 @@ router.get(path, (req,res) =>{
 //create a new attendance frequency
 router.post(path, (req,res) =>{
     const{frequency}=req.body
-    connection.query("CALL `REDO_MAKMA`.`createFrecuency`(?);", [frequency], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`createFrequencies`(?);", [frequency], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
@@ -37,7 +37,7 @@ router.delete(path, (req,res) =>{
     const{id}=req.body
     console.log(req.body);
     
-    connection.query("CALL `REDO_MAKMA`.`deleteFrecuency`(?);", [id], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`deleteFrequency`(?);", [id], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
@@ -53,7 +53,7 @@ router.delete(path, (req,res) =>{
 router.put(path, (req,res)=>{
     const{id,frequency}=req.body
     console.log(req.body)
-    connection.query("CALL `REDO_MAKMA`.`updateFrecuency`(?,?);", [id,frequency], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`updateFrequency`(?,?);", [id,frequency], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
