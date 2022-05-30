@@ -35,6 +35,9 @@ const rollCall = require('./routes/rollCall')
 const inCommunityAttendance = require('./routes/inCommunityAttendance')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
+const fileUpload = require("express-fileupload");
+// app.use(fileUpload());
+
 app.use(cors())
 app.use(express.urlencoded({ extended: true })); //Nos permite tomar el contenido del cuerpo
 app.use(express.json());  //Para pasarlo a formato json
