@@ -6,8 +6,8 @@ const path = '/community'
 //create a new community that will be attended by BAMX
 router.post(path, (req, res)=>{
     const { name,status,branch,town,frequency  } = req.body
-    connection.query("CALL `REDO_MAKMA`.`createCommunity`(?,?,?,?,?);"
-    ,[name,status,branch,town,frequency], (err, result, fields) =>{
+    connection.query("CALL `REDO_MAKMA`.`createCommunity`(?,?,?,?);"
+    ,[name,branch,town,frequency], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
