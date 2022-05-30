@@ -6,9 +6,9 @@ const path = '/actBeneficiaries'
 //view the list of active beneficiaries by branch
 //id == branch id
 router.get(path, (req, res)=>{
-    const { branch } = req.token
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readActiveBeneficiaries`(?);"
-    ,[branch], (err, result, fields) =>{
+    ,[IdBranch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

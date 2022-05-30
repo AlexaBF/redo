@@ -5,9 +5,9 @@ const path = '/beneficiaries'
 
 //returns a list of beneficiaries by branch
 router.get(path, (req, res)=>{
-    const { branch } = req.token
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readBeneficiaries` (?);"
-    ,[branch], (err, result, fields) =>{
+    ,[IdBranch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

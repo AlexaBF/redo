@@ -6,9 +6,9 @@ const path = '/inactBeneficiaries'
 //view the list of inactive beneficiaries by branch
 //id == branch id
 router.get(path, (req, res)=>{
-    const { branch } = req.token
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readInactiveBeneficiaries`(?);"
-    ,[branch], (err, result, fields) =>{
+    ,[IdBranch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

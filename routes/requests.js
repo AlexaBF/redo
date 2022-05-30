@@ -5,9 +5,9 @@ const path = '/requests'
 
 //view the list of requests made by communities in the current month by branch id
 router.get(path, (req, res)=>{
-    const { branch } = req.token
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readRequests`(?);"
-    ,[branch], (err, result, fields) =>{
+    ,[IdBranch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

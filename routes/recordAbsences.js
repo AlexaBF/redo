@@ -5,9 +5,9 @@ const path = '/recordAbsences'
 
 //view the complete list of absences of recent beneficiaries by branch id
 router.get(path, (req, res)=>{
-    const { branch } = req.token
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readAbsencesRecord`(?);"
-    ,[branch], (err, result, fields) =>{
+    ,[IdBranch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

@@ -6,9 +6,9 @@ const path = '/rollCall'
 //view the list of beneficiaries and the relevant information
 //to do the beneficiaries roll call
 router.get(path,(req,res) =>{
-    const { branch } = req.body
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readRollCall`(?);",
-    [branch],(err, result, fields) =>{
+    [IdBranch],(err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

@@ -6,8 +6,8 @@ const path = '/attendanceJustify'
 
 //view the beneficiaries attendance by branch id
 router.get(path,(req,res) =>{
-    const { branch } = req.token
-    connection.query("CALL `REDO_MAKMA`.`readAttendance`(?);",[branch],(err, result, fields) =>{
+    const { IdBranch } = req.token
+    connection.query("CALL `REDO_MAKMA`.`readAttendance`(?);",[IdBranch],(err, result, fields) =>{
         if(err){
             res.status(500).send({
                 message:"There is an error"

@@ -6,9 +6,9 @@ const path = '/inCommunityAttendance';
 //view the information of the food packages that were send
 //to the communities on the current month
 router.get(path,(req,res)=>{
-    const {branch} = req.body
+    const {IdBranch} = req.token
     connection.query("CALL `REDO_MAKMA`.`readInactiveCommunityAttendance`(?);",
-    [branch],(err, result,fields)=>{
+    [IdBranch],(err, result,fields)=>{
         if(err){
             console.log(err)
             res.status(500).send({

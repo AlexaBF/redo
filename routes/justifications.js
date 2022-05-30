@@ -6,9 +6,9 @@ const path = '/justifications'
 
 //view the justifications of the beneficiaries by branch in the current month
 router.get(path,(req,res) =>{
-    const { branch } = req.body
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readJustificationRecord`(?);",
-    [branch],(err, result, fields) =>{
+    [IdBranch],(err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

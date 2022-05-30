@@ -6,8 +6,6 @@ const path = '/users'
 
 //returns a list of the users
 router.get(path, (req, res)=>{
-    console.log(req.token)
-    const {id, rol, branch} = req.token;
     connection.query("CALL `REDO_MAKMA`.`readUsers`();"
     ,[], (err, result, fields) =>{
         if(err){
@@ -23,7 +21,6 @@ router.get(path, (req, res)=>{
 //Creates a new user
 router.post(path, valUserInsertion(), (req, res) =>{
     const {name, mail, password, phone, rol, branch } = req.body
-    console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`createUser`(?,?,?,?,?,?)",
     [name, mail, password, phone, rol, branch],
     (err, result, fields) =>{
@@ -42,7 +39,6 @@ router.post(path, valUserInsertion(), (req, res) =>{
 //Delete user
 router.delete(path, (req,res) =>{
     const { id } = req.body
-    console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`deleteUser`(?)",
     [id],
     (err, result, fields) =>{
@@ -61,7 +57,6 @@ router.delete(path, (req,res) =>{
 //Update user
 router.put(path, valUserModification(),(req,res) =>{
     const { name,mail,phone,rol,branch,id } = req.body
-    console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`updateUser`(?,?,?,?,?,?)",
     [name,mail,phone,rol,branch,id],
     (err, result, fields) =>{
