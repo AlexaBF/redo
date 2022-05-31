@@ -6,13 +6,13 @@ const path = '/communities'
 //view the list of active communities by branch
 //id == branch id
 router.post(path, (req, res)=>{
-    const { id } = req.body
+    const { IdBranch } = req.body
     connection.query("CALL `REDO_MAKMA`.`readCommunities`(?);"
-    ,[id], (err, result, fields) =>{
+    ,[IdBranch], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
-                messaage:"There is an error"
+                message:"There is an error"
             })
         }else{
             res.send( result[0]);

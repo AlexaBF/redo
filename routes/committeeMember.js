@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router()
 const {connection} = require("../config/mysql.js")
+const {valCommitteeInsertion} = require("../validations/Committee");
 const path = '/committeeMember'
 
 //Create a comittee member
-router.post(path,(req,res) =>{
+router.post(path, valCommitteeInsertion(),(req,res) =>{
     const { name,phone,id } = req.body
     connection.query("CALL `REDO_MAKMA`.`createCommitteeMember`(?,?,?);",[name,phone,id],(err, result, fields) =>{
         if(err){
