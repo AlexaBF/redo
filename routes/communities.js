@@ -7,7 +7,7 @@ const path = '/communities'
 //id == branch id
 router.post(path, (req, res)=>{
     const { id } = req.body
-    connection.query("CALL `REDO_MAKMA`.`readActiveCommunities`(?);"
+    connection.query("CALL `REDO_MAKMA`.`readCommunities`(?);"
     ,[id], (err, result, fields) =>{
         if(err){
             console.log(err)
