@@ -6,7 +6,7 @@ const path = '/userBranch'
 //view the users registered for each branch
 router.post(path,(req,res) =>{
     const { id } = req.body
-    connection.query("CALL `REDO_MAKMA`.`readUsersB`(?);",
+    connection.query("CALL `REDO_MAKMA`.`readUsersBranch`(?);",
     [id],
     (err, result, fields) =>{
         if(err){
