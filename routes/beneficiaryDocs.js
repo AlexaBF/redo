@@ -17,7 +17,7 @@ app.post(path, (req, res)=>{
     if(!req.files || Object.keys(req.files).length === 0){ //Si no existe el atributo files en el req o si el archivo se encuentra vacío
         return res.status(400).send('No se enviaron archivos');
     }
-    let sampleFile = req.files.archivo;
+    let sampleFile = req.files.BeneficiariesData;
     console.log(req.files);
     sampleFile.mv(`./files/${sampleFile.name}`,err => {
         if(err) {
@@ -62,7 +62,7 @@ app.put(path, (req, res)=>{
     if(!req.files || Object.keys(req.files).length === 0){ //Si no existe el atributo files en el req o si el archivo se encuentra vacío
         return res.status(400).send('No se enviaron archivos');
     }
-    let sampleFile = req.files.archivo;
+    let sampleFile = req.files.Badge;
     console.log(sampleFile);
     console.log(req.body)
     //name, data, size, mimetype
