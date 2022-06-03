@@ -10,6 +10,9 @@ const beneficiaries = require('./routes/beneficiaries')
 const beneficiary = require('./routes/beneficiary')
 const beneficiaryGD = require('./routes/beneficiaryGD')
 const beneficiaryDocs = require('./routes/beneficiaryDocs')
+const beneficiaryDoc = require('./routes/beneficiaryDoc')
+const communityDocs = require('./routes/communityDocs')
+const communityDoc = require('./routes/communityDoc')
 const frequency = require('./routes/frequency')
 const day = require('./routes/day')
 const actBeneficiaries = require('./routes/actBeneficiaries')
@@ -33,6 +36,7 @@ const justifications = require('./routes/justifications')
 const actCommunityAttendance = require('./routes/actCommunityAttendance')
 const rollCall = require('./routes/rollCall')
 const inCommunityAttendance = require('./routes/inCommunityAttendance')
+const rollCall = require('./routes/rollCall')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 const fileUpload = require("express-fileupload");
@@ -57,6 +61,9 @@ app.use(path,beneficiaries);
 app.use(path,beneficiary);
 app.use(path,beneficiaryGD);
 app.use(path,beneficiaryDocs);
+app.use(path,beneficiaryDoc);
+app.use(path,communityDocs);
+app.use(path,communityDoc);
 app.use(path,frequency);
 app.use(path,day);
 app.use(path,actBeneficiaries);
@@ -80,7 +87,6 @@ app.use(path,justifications);
 app.use(path,actCommunityAttendance);
 app.use(path,rollCall);
 app.use(path,inCommunityAttendance);
-
 //Servidor
 app.set('port', process.env.PORT || 8080)
 app.listen(app.get('port'), () => {
