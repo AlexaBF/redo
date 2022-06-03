@@ -31,3 +31,4 @@ app.post(path, (req, res)=>{
         })
 })
 
+module.exports = app;
