@@ -3,7 +3,7 @@ const fileUpload = require('express-fileupload');
 
 const router = express.Router()
 const {connection} = require("../config/mysql.js");
-const path = '/beneficiaryDocs'
+const path = '/beneficiaryDoc'
 
 const app = express.Router();
 
@@ -32,6 +32,7 @@ app.post(path, (req, res)=>{
         count ++;
         console.log(row)
         console.log(count)
+        //const {FOLIO,NOMBRE,COLONIA,DIA,FREGISTRO,FVENCIMIENTO,ESTADO,BECA,FRECUENCIA,TELEFONO,SUCURSAL} = row
         if (Object.keys(row).length===11) {
             connection.query("CALL `REDO_MAKMA`.`beneficiaryDocs`(?,?,?,?,?,?,?,?,?,?,?,?);"
                 , [row['FOLIO FAMILIAR'], row['NOMBRE TITULAR'], row.COLONIA, row.DIA, row['F.REGISTRO'], row['F.VENCIMIENTO'],
@@ -65,9 +66,10 @@ app.put(path, (req, res)=>{
     let sampleFile = req.files.Badge;
     console.log(sampleFile);
     console.log(req.body)
+    const { IdBeneficiary } = req.body
     //name, data, size, mimetype
     connection.query("CALL `REDO_MAKMA`.`updateBeneficiaryDocs`(?,?,?,?,?);"
-    ,[req.body.idBeneficiary, sampleFile.name, sampleFile.data, sampleFile.size, sampleFile.mimetype], (err, result, fields) =>{
+    ,[IdBeneficiary, sampleFile.name, sampleFile.data, sampleFile.size, sampleFile.mimetype], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
