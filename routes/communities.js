@@ -4,9 +4,8 @@ const {connection} = require("../config/mysql.js")
 const path = '/communities'
 
 //view the list of active communities by branch
-//id == branch id
-router.post(path, (req, res)=>{
-    const { IdBranch } = req.body
+router.get(path, (req, res)=>{
+    const { IdBranch } = req.token
     connection.query("CALL `REDO_MAKMA`.`readCommunities`(?);"
     ,[IdBranch], (err, result, fields) =>{
         if(err){

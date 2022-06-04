@@ -36,7 +36,6 @@ const justifications = require('./routes/justifications')
 const actCommunityAttendance = require('./routes/actCommunityAttendance')
 const rollCall = require('./routes/rollCall')
 const inCommunityAttendance = require('./routes/inCommunityAttendance')
-const rollCall = require('./routes/rollCall')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 const fileUpload = require("express-fileupload");
