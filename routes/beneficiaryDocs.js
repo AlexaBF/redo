@@ -13,46 +13,46 @@ const csv = require('csv-parser');
 const fs = require('fs');
 
 //NUEVO-Subida masiva con archivo de beneficiarios.
-app.post(path, (req, res)=>{
-    if(!req.files || Object.keys(req.files).length === 0){ //Si no existe el atributo files en el req o si el archivo se encuentra vacío
+app.post(path, async (req, res) => {
+    if (!req.files || Object.keys(req.files).length === 0) { //Si no existe el atributo files en el req o si el archivo se encuentra vacío
         return res.status(400).send('No se enviaron archivos');
     }
     let sampleFile = req.files.file;
     // console.log(req);
-    sampleFile.mv(`./files/${sampleFile.name}`,err => {
-        if(err) {
+    const respo = await sampleFile.mv(`./files/${sampleFile.name}`, err => {
+        if (err) {
             return res.status(400).send({message: err})
         }
+        //name, data, size, mimetype
+        let count = -1;
+        fs.createReadStream(`./files/${sampleFile.name}`)
+            .pipe(csv())
+            .on('data', (row) => {
+                count++;
+                console.log(row)
+                console.log(count)
+                if (Object.keys(row).length === 11) {
+                    connection.query("CALL `REDO_MAKMA`.`beneficiaryDocs`(?,?,?,?,?,?,?,?,?,?,?,?);"
+                        , [row['FOLIO FAMILIAR'], row['NOMBRE TITULAR'], row.COLONIA, row.DIA, row['F.REGISTRO'], row['F.VENCIMIENTO'],
+                            row.ESTADO, row.BECA, row.FRECUENCIA, row.TELEFONO, row.SUCURSAL, count], (err, result, fields) => {
+                            if (err) {
+                                console.log(err)
+                                return res.status(500).send({
+                                    done: false
+                                })
+                            } else {
+                                console.log(row['FOLIO FAMILIAR'], row['NOMBRE TITULAR'], row.COLONIA, row.DIA, row['F.REGISTRO'], row['F.VENCIMIENTO'],
+                                    row.ESTADO, row.BECA, row.FRECUENCIA, row.TELEFONO, row.SUCURSAL, count);
+                                console.log(result);
+                            }
+                        });
+                }
+            })
+            .on('end', () => {
+                console.log('CSV file successfully processed');
+                return res.send({done: true});
+            });
     })
-    //name, data, size, mimetype
-    let count = -1;
-    fs.createReadStream(`./files/${sampleFile.name}`)
-        .pipe(csv())
-        .on('data', (row) => {
-            count ++;
-            console.log(row)
-            console.log(count)
-            if (Object.keys(row).length===11) {
-                connection.query("CALL `REDO_MAKMA`.`beneficiaryDocs`(?,?,?,?,?,?,?,?,?,?,?,?);"
-                    , [row['FOLIO FAMILIAR'], row['NOMBRE TITULAR'], row.COLONIA, row.DIA, row['F.REGISTRO'], row['F.VENCIMIENTO'],
-                        row.ESTADO, row.BECA, row.FRECUENCIA, row.TELEFONO, row.SUCURSAL, count], (err, result, fields) => {
-                        if (err) {
-                            console.log(err)
-                            return res.status(500).send({
-                                done: false
-                            })
-                        } else {
-                            console.log(row['FOLIO FAMILIAR'], row['NOMBRE TITULAR'], row.COLONIA, row.DIA, row['F.REGISTRO'], row['F.VENCIMIENTO'],
-                                row.ESTADO, row.BECA, row.FRECUENCIA, row.TELEFONO, row.SUCURSAL, count);
-                            console.log( result );
-                        }
-                    });
-            }
-        })
-        .on('end', () => {
-            console.log('CSV file successfully processed');
-            return res.send({done: true});
-        });
 });
 
 
