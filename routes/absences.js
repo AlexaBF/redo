@@ -28,9 +28,9 @@ router.get(path, (req, res)=>{
 
 //update absence
 router.put(path, (req, res)=>{
-    const { idReason,idAbsence } = req.body
-    connection.query("CALL `REDO_MAKMA`.`updateAbsence`(?,?);"
-    ,[idReason,idAbsence], (err, result, fields) =>{
+    const { idReason,idAbsence, textReason } = req.body
+    connection.query("CALL `REDO_MAKMA`.`updateAbsence`(?,?,?);"
+    ,[idReason,idAbsence, textReason], (err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
