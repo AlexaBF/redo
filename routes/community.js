@@ -3,6 +3,23 @@ const router = express.Router()
 const {connection} = require("../config/mysql.js")
 const path = '/community'
 
+
+//view the list of active communities and their information by branch
+router.get(path, (req, res)=>{
+    const { IdBranch } = req.token
+    connection.query("CALL `REDO_MAKMA`.`readCommunities`(?);"
+        ,[IdBranch], (err, result, fields) =>{
+            if(err){
+                console.log(err)
+                res.status(500).send({
+                    message:"There is an error"
+                })
+            }else{
+                res.send( result[0]);
+            }
+        })
+})
+
 //create a new community that will be attended by BAMX
 router.post(path, (req, res)=>{
     const { name,town,frequency  } = req.body
