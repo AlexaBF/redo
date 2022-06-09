@@ -12,7 +12,7 @@ const fs = require('fs');
 const fileUpload = require("express-fileupload");
 
 app.use(fileUpload()); //Recibe y procesa
-// futuro post
+// attendance weekly report
 app.get(path, (req, res) => {
     //res.setHeader('Content-Type', 'application/pdf')
     const date = req.params.date;
