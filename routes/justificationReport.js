@@ -90,13 +90,9 @@ app.get(path, (req, res) => {
                     //Aditional info
                     report.printedAt({align: "right", text: "Hora: {0}:{1}{2}\non {3}"});
                     //Title
-                    report.print('Reporte de faltas', {x: 220, y: 90, fontSize: 20, fontBold: true})
+                    report.print('Reporte de justificaciones',{x: 190,y: 90,fontSize:20,fontBold:true})
                     report.newLine();
-                    report.print("Reporte semanal de beneficiarios que faltaron en punto de venta.", {
-                        x: 140,
-                        y: 110,
-                        fontSize: 11
-                    });
+                    report.print("Reporte semanal de beneficiarios que realizaron una justificación.", {x: 160,y: 110, fontSize: 11});
                     report.newLine();
                 }
 
