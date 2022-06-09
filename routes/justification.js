@@ -6,9 +6,9 @@ const path = '/justification'
 
 //create a justification
 router.post(path,(req,res) =>{
-    const { date,idBeneficiary,idReason, textReason } = req.body
+    const { date,folio,idReason, textReason='' } = req.body
     connection.query("CALL `REDO_MAKMA`.`createJustification`(?,?,?,?);",
-    [date, idBeneficiary, idReason, textReason],(err, result, fields) =>{
+    [date, folio, Number(idReason), textReason],(err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({
