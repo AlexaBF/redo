@@ -7,7 +7,7 @@ const path = '/community'
 //view the list of active communities and their information by branch
 router.get(path, (req, res)=>{
     const { IdBranch } = req.token
-    connection.query("CALL `REDO_MAKMA`.`readCommunities`(?);"
+    connection.query("CALL `REDO_MAKMA`.`readCommunity`(?);"
         ,[IdBranch], (err, result, fields) =>{
             if(err){
                 console.log(err)
