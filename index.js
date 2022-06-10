@@ -36,6 +36,10 @@ const justifications = require('./routes/justifications')
 const rollCall = require('./routes/rollCall')
 const actCommunityAttendance = require('./routes/actCommunityAttendance')
 const inCommunityAttendance = require('./routes/inCommunityAttendance')
+const attendanceReport = require('./routes/attendanceReport')
+const absenceReport = require('./routes/absenceReport')
+const justificationReport = require('./routes/justificationReport')
+const attendanceRecord = require('./routes/attendanceRecord')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 const fileUpload = require("express-fileupload");
@@ -47,7 +51,11 @@ app.use(express.json());  //Para pasarlo a formato json
 
 //Routes
 const path = '/api'
+
 app.post(path+"/login", login)
+app.use(path, attendanceReport);
+app.use(path, absenceReport);
+app.use(path, justificationReport);
 app.use(authMiddleware)
 //IMPORTANT: ALL THE ROUTES THAT ARE ADDED UP FROM THE AUTHMIDDLEWARE WILL BE UNPROTECTED
 // ADD ALL THE PROTECTED ROUTES BELOW THIS COMMENT
@@ -86,6 +94,7 @@ app.use(path,justifications);
 app.use(path,actCommunityAttendance);
 app.use(path,rollCall);
 app.use(path,inCommunityAttendance);
+app.use(path,attendanceRecord);
 //Servidor
 app.set('port', process.env.PORT || 8080)
 app.listen(app.get('port'), () => {
