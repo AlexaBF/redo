@@ -24,9 +24,9 @@ app.get(path, (req, res)=>{
                 })
             }else{
                 //No es res.json
-                res.setHeader('Content-Disposition', `attachment; filename="${result[0].name}"`); //Forzar la descarga del archivo  y necesita un nombre (results[0].name)
-                res.setHeader('Content-Type', result[0].mimetype) //¿De qué tipo es el conteniodo del archivo?  Porque cada contenido que se sube a internet tiene varios nombres application/
-                res.send(result[0].data); //Escribes bytes en el response
+                res.setHeader('Content-Disposition', `attachment; filename="${result[0].Nombre}"`); //Forzar la descarga del archivo  y necesita un nombre (results[0].name)
+                res.setHeader('Content-Type', result[0].Mimetype) //¿De qué tipo es el conteniodo del archivo?  Porque cada contenido que se sube a internet tiene varios nombres application/
+                res.send(result[0].Data); //Escribes bytes en el response
                 //De esta forma el response es un archivo
             }
         })
