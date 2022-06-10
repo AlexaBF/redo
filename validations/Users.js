@@ -9,7 +9,7 @@ module.exports.valUserInsertion = ()=>{
         validateAlphaOfSize('name','nombre'),
         validateNumeric('branch','sucursal'),
         validateNumeric('rol'),
-        validatePassword('password', 'clave'),
+        validatePassword('password', 'contraseñas'),
         ValMiddleware
     ]
 }
@@ -31,7 +31,7 @@ module.exports.valPassModification = () =>{
     const {validateNumeric,validatePassword, validatePasswordMatch} = Validations
     return [
         validatePassword('password', 'La contraseña'),
-        validatePassword('confirmationPassword', 'clave de confirmacion'),
+        validatePassword('confirmationPassword', 'contraseña de confirmacion'),
         validateNumeric('id'),
         validatePasswordMatch(),
         ValMiddleware
