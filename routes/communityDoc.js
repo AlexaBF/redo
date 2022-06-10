@@ -23,10 +23,13 @@ app.post(path, (req, res)=>{
                     done:false
                 })
             }else{
+                const mydata = Object.values(JSON.parse(JSON.stringify(result[0])));
+                console.log(mydata)
+                console.log('\n\n',mydata[0].Nombre)
                 //No es res.json
-                res.setHeader('Content-Disposition', `attachment; filename="${results[0].name}"`); //Forzar la descarga del archivo  y necesita un nombre (results[0].name)
-                res.setHeader('Content-Type', results[0].mimetype) //¿De qué tipo es el conteniodo del archivo?  Porque cada contenido que se sube a internet tiene varios nombres application/
-                res.send(results[0].data); //Escribes bytes en el response
+                res.setHeader('Content-Disposition', `attachment; filename="${mydata[0].Nombre}"`); //Forzar la descarga del archivo  y necesita un nombre (results[0].name)
+                res.setHeader('Content-Type', mydata[0].Mimetype) //¿De qué tipo es el conteniodo del archivo?  Porque cada contenido que se sube a internet tiene varios nombres application/
+                res.send(mydata[0].Data); //Escribes bytes en el response
                 //De esta forma el response es un archivo
             }
         })
