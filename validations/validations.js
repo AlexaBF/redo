@@ -34,7 +34,7 @@ module.exports.Validations = {
             .isNumeric()
             .withMessage(`${alias} debe ser numérico`)
     ),
-    validatePassword: (field, alias = "La contraseña") =>(
+    validatePassword: (field, alias = field) =>(
         check(field)
             .notEmpty()
             .withMessage(`${alias} es requerida`)

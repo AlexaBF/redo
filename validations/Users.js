@@ -31,7 +31,7 @@ module.exports.valPassModification = () =>{
     const {validateNumeric,validatePassword, validatePasswordMatch} = Validations
     return [
         validatePassword('password', 'La contraseña'),
-        validatePassword('confirmationPassword', 'contraseña de confirmacion'),
+        validatePassword('confirmationPassword', 'La contraseña de confirmacion'),
         validateNumeric('id'),
         validatePasswordMatch(),
         ValMiddleware
