@@ -7,10 +7,7 @@ const path = '/communityDocs'
 
 const app = express.Router();
 
-app.use(fileUpload()); //Recibe y procesa
-
-
-
+//app.use(fileUpload()); //Recibe y procesa
 
 //specific documents of the beneficiaries are added/modified
 app.put(path, (req, res)=>{
@@ -22,10 +19,10 @@ app.put(path, (req, res)=>{
     let sampleFile = req.files.file;
     console.log(sampleFile);
     //console.log(req.body)
-    // const { IdReport, Signatures } = req.body
+    const { IdReport, Signatures } = req.body
     //name, data, size, mimetype
     connection.query("CALL `REDO_MAKMA`.`updateCommunityReportDocs`(?,?,?,?,?,?);"
-        ,[ req.body.idReport, req.body.signatures, sampleFile.name, sampleFile.data, sampleFile.size, sampleFile.mimetype], (err, result, fields) =>{
+        ,[ IdReport, Signatures, sampleFile.name, sampleFile.data, sampleFile.size, sampleFile.mimetype], (err, result, fields) =>{
             if(err){
                 console.log(err)
                 res.status(500).send({

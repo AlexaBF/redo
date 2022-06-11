@@ -11,7 +11,7 @@ const csv = require('csv-parser');
 const fs = require('fs');
 const fileUpload = require("express-fileupload");
 
-app.use(fileUpload()); //Recibe y procesa
+//app.use(fileUpload()); //Recibe y procesa
 // attendance weekly report
 app.get(path, (req, res) => {
     //res.setHeader('Content-Type', 'application/pdf')

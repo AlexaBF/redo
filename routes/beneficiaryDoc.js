@@ -7,7 +7,7 @@ const path = '/beneficiaryDoc/:IdBeneficiary'
 
 const app = express.Router();
 
-app.use(fileUpload()); //Recibe y procesa
+//app.use(fileUpload()); //Recibe y procesa
 
 //NUEVO-obtención de archivos de uno de los beneficiarios
 app.get(path, (req, res)=>{

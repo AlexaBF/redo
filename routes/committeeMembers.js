@@ -5,8 +5,8 @@ const path = '/committeeMembers'
 
 //view the list of committee members
 router.get(path,(req,res) =>{
-    const { IdBranch } = req.token
-    connection.query("CALL `REDO_MAKMA`.`readCommitteeMembers`(?);",[IdBranch],(err, result, fields) =>{
+    const {idCommunity} = req.body
+    connection.query("CALL `REDO_MAKMA`.`readCommitteeMembers`(?);",[idCommunity],(err, result, fields) =>{
         if(err){
             console.log(err)
             res.status(500).send({

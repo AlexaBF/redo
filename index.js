@@ -43,24 +43,30 @@ const attendanceRecord = require('./routes/attendanceRecord')
 const {authMiddleware, login} = require('./routes/authorization.js')
 const {auth} = require("mysql/lib/protocol/Auth");
 const fileUpload = require("express-fileupload");
-// app.use(fileUpload());
-
 app.use(cors())
-app.use(express.urlencoded({ extended: true })); //Nos permite tomar el contenido del cuerpo
-app.use(express.json());  //Para pasarlo a formato json
+app.use(fileUpload());
 
 //Routes
 const path = '/api'
 
-app.post(path+"/login", login)
+app.post(path+"/login", express.json(),login)
 /*
+ */
+app.use(express.json(),authMiddleware)
+//IMPORTANT: ALL THE ROUTES THAT ARE ADDED UP FROM THE AUTHMIDDLEWARE WILL BE UNPROTECTED
+// ADD ALL THE PROTECTED ROUTES BELOW THIS COMMENT
+//Files
 app.use(path, attendanceReport);
 app.use(path, absenceReport);
 app.use(path, justificationReport);
- */
-app.use(authMiddleware)
-//IMPORTANT: ALL THE ROUTES THAT ARE ADDED UP FROM THE AUTHMIDDLEWARE WILL BE UNPROTECTED
-// ADD ALL THE PROTECTED ROUTES BELOW THIS COMMENT
+app.use(path,communityDocs);
+app.use(path,beneficiaryDocs);
+app.use(path,beneficiaryDoc);
+app.use(path,communityDoc);
+
+//ALL the endpoint with json below this comment
+app.use(express.urlencoded({ extended: true })); //Nos permite tomar el contenido del cuerpo
+app.use(express.json({type:"application/json"}));  //Para pasarlo a formato json
 app.use(path, users);
 app.use(path,status);
 app.use(path,branch);
@@ -69,10 +75,6 @@ app.use(path,user);
 app.use(path,beneficiaries);
 app.use(path,beneficiary);
 app.use(path,beneficiaryGD);
-app.use(path,beneficiaryDocs);
-app.use(path,beneficiaryDoc);
-app.use(path,communityDocs);
-app.use(path,communityDoc);
 app.use(path,frequency);
 app.use(path,day);
 app.use(path,actBeneficiaries);

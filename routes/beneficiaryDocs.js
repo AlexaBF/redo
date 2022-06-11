@@ -7,7 +7,7 @@ const path = '/beneficiaryDocs'
 
 const app = express.Router();
 
-app.use(fileUpload()); //Recibe y procesa
+//app.use(fileUpload()); //Recibe y procesa
 
 const csv = require('csv-parser');
 const fs = require('fs');
@@ -64,9 +64,8 @@ app.put(path, (req, res)=>{
         return res.status(400).send('No se enviaron archivos');
     }
     let sampleFile = req.files.file;
-    console.log(sampleFile);
-    //console.log(req.body)
     const { IdBeneficiary } = req.body
+    console.log(sampleFile,IdBeneficiary);
     //name, data, size, mimetype
     connection.query("CALL `REDO_MAKMA`.`updateBeneficiaryDocs`(?,?,?,?,?);"
     ,[IdBeneficiary, sampleFile.name, sampleFile.data, sampleFile.size, sampleFile.mimetype], (err, result, fields) =>{

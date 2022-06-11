@@ -7,7 +7,7 @@ const path = '/communityDoc/:IdReport'
 
 const app = express.Router();
 
-app.use(fileUpload()); //Recibe y procesa
+//app.use(fileUpload()); //Recibe y procesa
 
 //NUEVO-obtención de archivos de todos los beneficiarios
 app.post(path, (req, res)=>{
