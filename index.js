@@ -23,6 +23,7 @@ const recorAbsences = require('./routes/recordAbsences')
 const requests = require('./routes/requests')
 const reasons = require('./routes/reasons')
 const towns = require('./routes/towns')
+const town = require('./routes/town')
 const community = require('./routes/community')
 const state = require('./routes/state')
 const userBranch = require('./routes/userBranch')
@@ -85,6 +86,7 @@ app.use(path,recorAbsences);
 app.use(path,requests);
 app.use(path,reasons);
 app.use(path,towns);
+app.use(path,town);
 app.use(path,communities);
 app.use(path,state);
 app.use(path,userBranch);
