@@ -4,8 +4,8 @@ const {connection} = require("../config/mysql.js")
 const path = '/committeeMembers'
 
 //view the list of committee members
-router.get(path,(req,res) =>{
-    const {idCommunity} = req.body
+router.get(path+'/:idCommunity',(req,res) =>{
+    const {idCommunity}= req.params;
     connection.query("CALL `REDO_MAKMA`.`readCommitteeMembers`(?);",[idCommunity],(err, result, fields) =>{
         if(err){
             console.log(err)

@@ -11,15 +11,13 @@ const app = express.Router();
 
 //specific documents of the beneficiaries are added/modified
 app.put(path, (req, res)=>{
-    console.log(req);
     if(!req.files || Object.keys(req.files).length === 0){ //Si no existe el atributo files en el req o si el archivo se encuentra vacío
         return res.status(400).send('No se enviaron archivos');
     }
-
     let sampleFile = req.files.file;
-    console.log(sampleFile);
     //console.log(req.body)
     const { IdReport, Signatures } = req.body
+    console.log(IdReport, Signatures, sampleFile)
     //name, data, size, mimetype
     connection.query("CALL `REDO_MAKMA`.`updateCommunityReportDocs`(?,?,?,?,?,?);"
         ,[ IdReport, Signatures, sampleFile.name, sampleFile.data, sampleFile.size, sampleFile.mimetype], (err, result, fields) =>{
