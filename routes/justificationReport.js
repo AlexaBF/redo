@@ -16,16 +16,18 @@ const fs = require('fs');
 app.get(path, (req, res) => {
     //res.setHeader('Content-Type', 'application/pdf')
     const date = req.params.date;
-    connection.query("CALL `REDO_MAKMA`.`justificationReport`(?);",
-        [date], (err, result, fields) =>{
+    const { IdBranch } = req.token
+    connection.query("CALL `REDO_MAKMA`.`justificationReport`(?,?);",
+        [date, IdBranch], (err, result, fields) =>{
             if(err){
                 console.log(err)
                 res.status(500).send({
                     message:"There is an error"
                 })
             }else {
-                var mydata = Object.values(JSON.parse(JSON.stringify(result[0])));
-                console.log(mydata);
+                const mydata = result[0]
+                //var mydata = Object.values(JSON.parse(JSON.stringify(result[0])));
+                console.log(mydata.Folio);
                 res.type('application/pdf');
                 //Información de la tabla
                 var daydetail = function ( report, data ) {
@@ -65,7 +67,7 @@ app.get(path, (req, res) => {
 
 //Page footer
                 var pageF = function (report, data) {
-                    report.pageNumber({align: "right", text: "Page {0}"})
+                    report.pageNumber({align: "right", text: "Página {0}"})
 
                 };
 
@@ -73,7 +75,7 @@ app.get(path, (req, res) => {
                 const header = (report, data) => {
 
                     //Confidencial
-                    report.print('Confidential', {
+                    report.print('Confidencial', {
                         x: 40,
                         y: 610,
                         rotate: 310,
@@ -88,7 +90,7 @@ app.get(path, (req, res) => {
                     report.image('./images/Bamx.png', {width: 70});
 
                     //Aditional info
-                    report.printedAt({align: "right", text: "Hora: {0}:{1}{2}\non {3}"});
+                    report.printedAt({align: "right", text: "Hora: {0}:{1}{2}\nFecha: {3}"});
                     //Title
                     report.print('Reporte de justificaciones',{x: 190,y: 90,fontSize:20,fontBold:true})
                     report.newLine();
