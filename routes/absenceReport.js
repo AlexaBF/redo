@@ -16,8 +16,9 @@ const fileUpload = require("express-fileupload");
 app.get(path, (req, res) => {
     //res.setHeader('Content-Type', 'application/pdf')
     const date = req.params.date;
-    connection.query("CALL `REDO_MAKMA`.`absenceReport`(?);",
-        [date], (err, result, fields) =>{
+    const { IdBranch } = req.token
+    connection.query("CALL `REDO_MAKMA`.`absenceReport`(?,?);",
+        [date,IdBranch], (err, result, fields) =>{
             if(err){
                 console.log(err)
                 res.status(500).send({
@@ -89,7 +90,7 @@ app.get(path, (req, res) => {
 
 //Page footer
                 var pageF = function (report, data) {
-                    report.pageNumber({align: "right", text: "Page {0}"})
+                    report.pageNumber({align: "right", text: "Página {0}"})
 
                 };
 
@@ -97,7 +98,7 @@ app.get(path, (req, res) => {
                 const header = (report, data) => {
 
                     //Confidencial
-                    report.print('Confidential', {
+                    report.print('Confidencial', {
                         x: 40,
                         y: 610,
                         rotate: 310,
@@ -112,7 +113,7 @@ app.get(path, (req, res) => {
                     report.image('./images/Bamx.png', {width: 70});
 
                     //Aditional info
-                    report.printedAt({align: "right", text: "Hora: {0}:{1}{2}\non {3}"});
+                    report.printedAt({align: "right", text: "Hora: {0}:{1}{2}\nFecha: {3}"});
                     //Title
                     report.print('Reporte de faltas', {x: 220, y: 90, fontSize: 20, fontBold: true})
                     report.newLine();
