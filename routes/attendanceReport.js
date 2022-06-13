@@ -25,7 +25,7 @@ app.get(path, (req, res) => {
                     message: "There is an error"
                 })
             } else {
-                var mydata = result[0][0];
+                var mydata = result[0];
                 console.log(mydata);
 
                 res.type('application/pdf');
