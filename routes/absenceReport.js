@@ -94,7 +94,7 @@ app.get(path, (req, res) => {
                     report.image('./images/Bamx.png', {width: 70});
 
                     //Aditional info
-                    report.printedAt({align: "right", text: "Hora: {0}:{1}{2}\nFecha: {3}"});
+                    report.printedAt({align: "right", text: 'Hora: '+ data.Hora + '\nFecha: '+ data.Fecha});
                     //Title
                     report.print('Reporte de faltas', {x: 220, y: 90, fontSize: 20, fontBold: true})
                     report.newLine();
