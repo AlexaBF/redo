@@ -36,31 +36,12 @@ app.get(path, (req, res) => {
                     report.band([
 
                         {data: data.Folio, width: cellWidth, zborder: {left: 1, right: 1, top: 1, bottom: 0}}, //Columna 1
-                        {data: data.Nombre, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}}, {
-                            data: data.Frecuencia,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        }, //Columna 3
+                        {data: data.Nombre, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}},
+                        {data: data.Frecuencia, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}}, //Columna 3
                         {data: data.Dia, width: 55, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}}, //Columna 4
-                        {
-                            data: data.Telefono,
-                            width: 63,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        }, //Columna 5
-                        {
-                            data: data.FechaFalta,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        }, //7
-                        {
-                            data: data.MotivoFalta,
-                            width: 125,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        }, //7
+                        {data: data.Telefono, width: 63, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}}, //Columna 5
+                        {data: data.FechaFalta, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}}, //7
+                        {data: data.MotivoFalta, width: 125, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}}, //7
                     ], {border: 1, width: 0, wrap: 1, fill: '#F3F1F4'});
                 };
 
@@ -72,7 +53,7 @@ app.get(path, (req, res) => {
 
 //Encabezado en tabla
                 var nameheader = function (report, data) {
-                    report.print(data.Dia, {fontBold: true, underline: true});
+                    report.print(data.DiaSemana, {fontBold: true, underline: true});
                     report.band([
                         {data: 'Folio', width: 80},
                         {data: 'Nombre', width: 87},
@@ -134,7 +115,7 @@ app.get(path, (req, res) => {
                     .fontSize(9.5)
 
 
-                rpt.groupBy("DiaFalta")
+                rpt.groupBy("DiaSemana")
                     .fontSize(11)
                     .header(nameheader)
                     .footer(namefooter)

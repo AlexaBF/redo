@@ -35,35 +35,11 @@ app.get(path, (req, res) => {
                     report.band([
 
                         {data: data.Folio, width: cellWidth, zborder: {left: 1, right: 1, top: 1, bottom: 0}},
-                        {
-                            data: data.Nombre,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        },
-                        {
-                            data: data.Frecuencia,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        },
-                        {
-                            data: data.Dia,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        },
-                        {
-                            data: data.FechaAsistencia,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 1, right: 1, top: 0, bottom: 1}
-                        },
-                        {
-                            data: data.DiaAsistencia,
-                            width: cellWidth,
-                            underline: false,
-                            zborder: {left: 0, right: 1, top: 0, bottom: 1}
+                        {data: data.Nombre, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}},
+                        {data: data.Frecuencia, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}},
+                        {data: data.Dia, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}},
+                        {data: data.FechaAsistencia, width: cellWidth, underline: false, zborder: {left: 1, right: 1, top: 0, bottom: 1}},
+                        {data: data.DiaSemana, width: cellWidth, underline: false, zborder: {left: 0, right: 1, top: 0, bottom: 1}
                         },
                     ], {border: 1, width: 0, wrap: 1, fill: '#F3F1F4'});
 
@@ -80,7 +56,7 @@ app.get(path, (req, res) => {
                 var nameheader = function (report, data) {
                     report.newLine();
                     report.newLine();
-                    report.print(data.Dia, {fontBold: true, underline: true});
+                    report.print(data.DiaSemana, {fontBold: true, underline: true});
                     report.band([
                         {data: 'Folio', width: 95},
                         {data: 'Nombre', width: 93},
@@ -139,7 +115,7 @@ app.get(path, (req, res) => {
                     .fontSize(11)
 
                 //GroupBy day
-                rpt.groupBy("DiaAsistencia")
+                rpt.groupBy("DiaSemana")
                     .fontSize(11)
                     .header(nameheader)
                     .footer(namefooter)
