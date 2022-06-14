@@ -39,7 +39,7 @@ app.get(path, (req, res) => {
                         {data: data.Frecuencia, width: 80, underline: false, zborder:{left:1, right: 1, top: 0, bottom: 1}}, //Columna 3
                         {data: data.Dia, width: 70, underline: false, zborder:{left:1, right: 1, top: 0, bottom: 1}}, //Columna 4
                         {data: data.FechaJustificada, width: cellWidth, underline: false, zborder:{left:1, right: 1, top: 0, bottom: 1}}, //7
-                        {data: data.MotivoJusticacion, width: 136, underline: false, zborder:{left:1, right: 1, top: 0, bottom: 1}}, //7
+                        {data: data.MotivoJustificacion, width: 136, underline: false, zborder:{left:1, right: 1, top: 0, bottom: 1}}, //7
                     ], {border:1, width: 0, wrap: 1,fill:'#F3F1F4'}  );
                 };
 
