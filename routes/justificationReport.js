@@ -107,7 +107,7 @@ app.get(path, (req, res) => {
                     .fontSize(9.5)
 
 
-                rpt.groupBy("MotivoJustificacion")
+                rpt.groupBy("IdMotivo")
                     .fontSize(11)
                     .header(nameheader)
                     .footer(namefooter)
