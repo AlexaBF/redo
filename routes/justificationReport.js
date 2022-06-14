@@ -58,7 +58,7 @@ app.get(path, (req, res) => {
                         {data: 'Frecuencia', width: 87},
                         {data: 'Día', width: 70},
                         {data: 'Fecha de justificación', width: 95},
-                        {data: '# Total de\njustificaciones', width: 130}
+                        {data: 'Motivo de\njustificacion', width: 130}
                     ],{border:0, width: 0, wrap: 1,fontBold:true,fontSize:12});
                     report.fontNormal();
                     report.bandLine();
