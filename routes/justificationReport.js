@@ -51,7 +51,7 @@ app.get(path, (req, res) => {
 
 //Encabezado en tabla
                 var nameheader = function ( report, data ) {
-                    report.print( data.DiaSemana, {fontBold: true, underline: true} );
+                    report.print( data.MotivoJustificacion, {fontBold: true, underline: true} );
                     report.band([
                         {data: 'Folio', width: 95},
                         {data: 'Nombre', width: 95},
@@ -107,7 +107,7 @@ app.get(path, (req, res) => {
                     .fontSize(9.5)
 
 
-                rpt.groupBy("DiaSemana")
+                rpt.groupBy("MotivoJustificacion")
                     .fontSize(11)
                     .header(nameheader)
                     .footer(namefooter)
