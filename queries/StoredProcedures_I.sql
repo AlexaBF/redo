@@ -1,21 +1,20 @@
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- STORED PROCEDURES DEL SISTEMA: INACTIVOS (I)
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- *29.1 Rutina para la visualización de los beneficiarios inactivos del sistema
+-- Rutina para la visualización de los beneficiarios inactivos del sistema
 USE `REDO_MAKMA`;
 DROP procedure IF EXISTS `readInactiveBeneficiaries`;
 
 DELIMITER $$
 USE `REDO_MAKMA`$$
 CREATE PROCEDURE `readInactiveBeneficiaries` (IN IdBranch INT)
-    -- 29.1 Rutina para la visualización de los beneficiarios inactivos del sistema
--- REVISAR ENDPOINT Y EL STORED PROCEDURE --
 BEGIN
+    -- Visualización de los beneficiarios inactivos del sistema
     SELECT b.idBeneficiario Id,
            b.folio Folio,
            b.nombre Nombre,
            b.colonia Colonia,
-           b.fvencimiento Fecha,
+           DATE_FORMAT(b.fvencimiento, '%d-%m-%Y') Fecha,
            COUNT(fa.beneficiario_idBeneficiario) Falta
     FROM Beneficiario b
              LEFT JOIN FrecuenciaVisita f
