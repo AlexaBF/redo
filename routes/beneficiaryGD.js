@@ -12,7 +12,7 @@ day(int) = Monday(1), Tuesday(2), Wednesday(3),Thursday(4) or Friday(5)
 frecuency(int) = Weekly(1), Biweekly(2) or Monthly(3)
 */
 router.put(path, (req, res)=>{
-    const { id,grant,phone,day,frecuency } = req.body
+    const { id,grant,phone,day,frequency } = req.body
     console.log(req.body)
     connection.query("CALL `REDO_MAKMA`.`UpdateBeneficiaryGD`(?,?,?,?,?);"
     ,[id,grant,phone,day,frecuency], (err, result, fields) =>{
