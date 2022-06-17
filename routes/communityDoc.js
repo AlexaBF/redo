@@ -9,7 +9,7 @@ const app = express.Router();
 
 //app.use(fileUpload()); //Recibe y procesa
 
-//NUEVO-obtención de archivos de todos los beneficiarios
+//get the attendance list of a report
 app.post(path, (req, res)=>{
     //console.log(req.body)
     const IdReport = req.params.IdReport;

@@ -35,7 +35,7 @@ app.put(path, (req, res)=>{
 
 
 
-//NUEVO-obtención de archivos de todos los beneficiarios
+//get the attendance list of all the reports
 app.post(path, (req, res)=>{
     console.log(req.body)
     const { IdBranch } = req.token
